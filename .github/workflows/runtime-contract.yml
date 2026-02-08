@@ -1,0 +1,45 @@
+name: runtime-contract
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "29 4 * * *"
+  workflow_dispatch:
+
+jobs:
+  contract-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout t81-examples
+        uses: actions/checkout@v4
+        with:
+          path: t81-examples
+
+      - name: Checkout t81-vm
+        uses: actions/checkout@v4
+        with:
+          repository: t81dev/t81-vm
+          path: t81-vm
+          ref: main
+
+      - name: Validate runtime contract marker
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          repo = Path("t81-examples/contracts/runtime-contract.json")
+          vm = Path("t81-vm/docs/contracts/vm-compatibility.json")
+          repo_contract = json.loads(repo.read_text(encoding="utf-8"))
+          vm_contract = json.loads(vm.read_text(encoding="utf-8"))
+
+          if repo_contract.get("contract_version") != vm_contract.get("contract_version"):
+              raise SystemExit("contract_version mismatch between t81-examples and t81-vm")
+          if not str(repo_contract.get("vm_main_pin", "")).strip():
+              raise SystemExit("vm_main_pin must be set in contracts/runtime-contract.json")
+
+          print("runtime contract marker: ok")
+          PY
+
