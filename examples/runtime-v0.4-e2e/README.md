@@ -1,6 +1,6 @@
 # Runtime v0.4 E2E Example
 
-This bundle verifies an end-to-end runtime path aligned with `runtime-contract-v0.4`:
+This bundle verifies an end-to-end runtime path aligned with `runtime-contract-v0.5`:
 
 1. emit deterministic canary bytecode (`t81-lang`),
 2. execute the program in `t81-vm` CLI,
