@@ -1,4 +1,4 @@
-# Runtime v0.4 E2E Example
+# Runtime v0.5 E2E Example
 
 This bundle verifies an end-to-end runtime path aligned with `runtime-contract-v0.5`:
 
@@ -17,7 +17,7 @@ This bundle verifies an end-to-end runtime path aligned with `runtime-contract-v
 ## Run
 
 ```bash
-scripts/run-runtime-v0.4-e2e.sh
+scripts/run-runtime-v0.5-e2e.sh
 ```
 
 Expected output includes:

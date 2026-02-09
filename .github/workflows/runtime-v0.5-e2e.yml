@@ -1,0 +1,48 @@
+name: runtime-v0.5-e2e
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "41 5 * * 1"
+  workflow_dispatch:
+
+jobs:
+  runtime-v0-5-e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout t81-examples
+        uses: actions/checkout@v4
+        with:
+          path: t81-examples
+
+      - name: Checkout t81-lang
+        uses: actions/checkout@v4
+        with:
+          repository: t81dev/t81-lang
+          path: t81-lang
+          ref: main
+
+      - name: Checkout t81-vm
+        uses: actions/checkout@v4
+        with:
+          repository: t81dev/t81-vm
+          path: t81-vm
+          ref: main
+
+      - name: Checkout t81-python
+        uses: actions/checkout@v4
+        with:
+          repository: t81dev/t81-python
+          path: t81-python
+          ref: main
+
+      - name: Run runtime-v0.5 consumer e2e path
+        env:
+          CODE_ROOT: ${{ github.workspace }}
+          T81_LANG_DIR: ${{ github.workspace }}/t81-lang
+          T81_VM_DIR: ${{ github.workspace }}/t81-vm
+          T81_PYTHON_DIR: ${{ github.workspace }}/t81-python
+        working-directory: t81-examples
+        run: scripts/run-runtime-v0.5-e2e.sh
