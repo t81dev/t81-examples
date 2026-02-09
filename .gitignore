@@ -1,1 +1,3 @@
 examples/runtime-v0.5-e2e/*.out
+examples/runtime-v0.5-trap-diagnostics/*.out
+examples/runtime-v0.5-mode-parity/*.json

@@ -56,3 +56,17 @@ jobs:
           T81_PYTHON_DIR: ${{ github.workspace }}/t81-python
         working-directory: t81-examples
         run: scripts/run-runtime-v0.5-e2e.sh
+
+      - name: Run runtime-v0.5 trap diagnostics path
+        env:
+          CODE_ROOT: ${{ github.workspace }}
+          T81_VM_DIR: ${{ github.workspace }}/t81-vm
+        working-directory: t81-examples
+        run: scripts/run-runtime-v0.5-trap-diagnostics.sh
+
+      - name: Run runtime-v0.5 mode parity path
+        env:
+          CODE_ROOT: ${{ github.workspace }}
+          T81_VM_DIR: ${{ github.workspace }}/t81-vm
+        working-directory: t81-examples
+        run: scripts/run-runtime-v0.5-mode-parity.sh
